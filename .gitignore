@@ -23,6 +23,9 @@ hs_err_pid*
 
 # Created by https://www.gitignore.io/api/gradle,eclipse
 
+# project data
+output/
+
 ### Eclipse ###
 
 .metadata
