@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    jcenter()
+}
+
+configurations.all {
+   exclude group: "org.slf4j", module: "slf4j-simple"
+}
+
+dependencies {
+    // Use JUnit test framework
+    compile 'io.reactivex.rxjava2:rxjava:2.1.8'
+    compile 'commons-io:commons-io:2.6'
+    compile 'com.sparkjava:spark-core:2.7.1'
+    
+    // Logging
+    // compile 'org.slf4j:slf4j-simple:1.7.25'
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    
+    // Tests
+    testCompile 'junit:junit:4.12'
+}
+
+// Define the main class for the application
+mainClassName = 'App'
+

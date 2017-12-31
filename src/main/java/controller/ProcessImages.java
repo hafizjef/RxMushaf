@@ -15,14 +15,14 @@ public class ProcessImages {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProcessImages.class);
 	
-	public static void doProcess(ImageModel img) {
+	public static void doProcess(ImageModel img) throws IOException {
 		Segmentation segmentation = new Segmentation();
-		File fPage = new File("copies/" + img.getmFile().getName());
+		File fPage = new File("output/copies/" + img.getmFile().getName());
 		
 		try {
 			FileUtils.copyFile(img.getmFile(), fPage);
 		} catch(IOException err) {
-			logger.error(err.getMessage());
+			throw err;
 		}
 		
 		segmentation.setFileCollectionPicPage(fPage);
@@ -39,7 +39,7 @@ public class ProcessImages {
 			segmentation.setFileCollectionPicText(mFrameRemoved);
 			segmentation.setFileCollectionPicFrame(mConvertFrame.getfFrameWithoutText());
 		} catch (IOException err) {
-			logger.error(err.getMessage());
+			throw err;
 		}
 		
 		logger.info("{} - Frame Removed", img.getmFile().getName());

@@ -52,18 +52,20 @@ public class ConvertFrame {
 		return bufImageOutput;
 	}
 	
-	public  File drawImage(BufferedImage image_dest,String directData, String picName) throws IOException {
+	public  File drawImage(BufferedImage image_dest,String parentDirectory, String picName) throws IOException {
 		int w = image_dest.getWidth();
 		int h = image_dest.getHeight();
 		arrayImage = new int[h][w];
 		FileWriter writer; 
-		String nameFile = "original/"+filename+new Long(new Date().getTime()).toString()+".txt";
-
+		String nameFile = parentDirectory + "/temp/" + filename + new Long(new Date().getTime()).toString() + ".txt";
+		
+		
 		File file = new File(nameFile);
 		if(file.exists()) {
 			writer = new FileWriter(file, true);
 			writer.close();
 		} else {
+			file.getParentFile().mkdirs();
 			writer = new FileWriter(file);
 			for(int y=0; y<h; y++) {
 				for(int x =0 ; x<w; x++) {
@@ -84,9 +86,9 @@ public class ConvertFrame {
 		
 		CutFrame cutimage = new CutFrame();
 		cutimage.setImage(arrayImage, buffImageInput);
-		File filePicWithoutFrame = cutimage.upperFrame(directData,picName);
+		File filePicWithoutFrame = cutimage.upperFrame(parentDirectory, picName);
 		int [][] iFrameWithoutText = cutimage.getFrameWithoutText();
-		File fFrameWithoutText = cutimage.printFrameWithoutText(iFrameWithoutText,directData,picName);
+		File fFrameWithoutText = cutimage.printFrameWithoutText(iFrameWithoutText, parentDirectory, picName);
 
 		setfFrameWithoutText(fFrameWithoutText);
 		
