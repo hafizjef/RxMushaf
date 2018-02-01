@@ -19,16 +19,16 @@ public class App implements SparkApplication {
     	port(8888);
     	
     	get("/", (req, res) -> {
-    		
-    		
+
+            // TODO:
+            // Extract image & metadata from request payload
+            // for further processing
     		ImageModel img = new ImageModel(new File("data/test.jpg"));
     		
     		Observable.just(img)
     			.observeOn(Schedulers.computation())
-					.doOnComplete(() -> logger.info("DONE"))
-    			.subscribe(ProcessImages::doProcess, e -> {
-    				logger.error(e.getMessage());
-    			});
+                    .doOnComplete(() -> logger.info("DONE"))
+                    .subscribe(ProcessImages::doProcess, e -> logger.error(e.getMessage()));
     		
     		logger.error("APP STARTED");
     		return "Hello";
