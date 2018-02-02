@@ -498,9 +498,10 @@ public class PointObjStop {
                 }
                 String nameFile = directData + "/tashih/processed/verse/" + namePic + "_" + (i + 1) + ".jpg";
 
-                File ouptut = new File(nameFile); // File save CutAlphabet
-                ImageIO.write(image, "jpg", ouptut);
-                imgVerse.add(ouptut);
+                File output = new File(nameFile); // File save CutAlphabet
+                output.getParentFile().mkdirs();
+                ImageIO.write(image, "jpg", output);
+                imgVerse.add(output);
                 image = null;
                 tempPicPrint = null;
             }
