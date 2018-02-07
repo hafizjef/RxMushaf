@@ -3,7 +3,7 @@ package frontEnd.apiController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static responseTransformer.JsonTransformer.toJson;
+import static Utils.JsonTransformer.toJson;
 import static spark.Spark.after;
 import static spark.Spark.notFound;
 

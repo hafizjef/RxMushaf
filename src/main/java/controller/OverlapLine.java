@@ -353,9 +353,10 @@ public class OverlapLine {
             }
             String nameFile = Long.toString(new Date().getTime());
 
-            File ouptut = new File(path + namePic + "_" + reNumcollectionObjects.get(i) + ".jpg"); // File save CutAlphabet
-            ImageIO.write(image, "jpg", ouptut);
-            directoryImage.add(ouptut.getAbsolutePath());
+            File output = new File(path + namePic + "_" + reNumcollectionObjects.get(i) + ".jpg"); // File save CutAlphabet
+            output.getParentFile().mkdirs();
+            ImageIO.write(image, "jpg", output);
+            directoryImage.add(output.getAbsolutePath());
 
             image = null;
             tempPicPrint = null;

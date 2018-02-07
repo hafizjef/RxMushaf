@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
-import static responseTransformer.JsonTransformer.json;
+import static Utils.JsonTransformer.json;
 import static spark.Spark.get;
 
 public class UserController extends BaseController {

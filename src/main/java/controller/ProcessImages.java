@@ -6,7 +6,6 @@ import featureTriangle.main.Triangle;
 import model.Bean_SegmentationModel;
 import model.ImageModel;
 import model.Segmentation;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,15 +20,7 @@ public class ProcessImages {
 
 	public static void doProcess(ImageModel img) throws IOException, InterruptedException {
 		Segmentation segmentation = new Segmentation();
-		File fPage = new File("output/copies/" + img.getmFile().getName());
-		
-		try {
-			FileUtils.copyFile(img.getmFile(), fPage);
-		} catch(IOException err) {
-			throw err;
-		}
-		
-		segmentation.setFileCollectionPicPage(fPage);
+        segmentation.setFileCollectionPicPage(img.getmFile());
 		
 		// Frame Removal
 		logger.info("{} - Removing Frame", img.getmFile().getName());
