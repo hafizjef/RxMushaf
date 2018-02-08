@@ -16,7 +16,7 @@ public class App implements SparkApplication {
 
     public static void main(String args[]) {
     	port(8888);
-        logger.info("APPLICATION INIT HIT");
+        logger.info("API Server Initialized");
         uploadDir.mkdirs();
         new UserController(new UserService());
         new ProcessController(new UserService());
