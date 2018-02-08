@@ -1,7 +1,9 @@
 package frontEnd.apiService;
 
 import Utils.Constants;
+import Utils.DataFinder;
 import database.MySqlDatabase;
+import model.DetailedResult;
 import model.ImageModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,36 @@ import java.util.UUID;
 public class UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
+    public DetailedResult getData(UUID uuid) {
+
+        DetailedResult detailedResult = new DetailedResult(uuid);
+
+        try (
+                Connection conn = MySqlDatabase.doConnection()
+        ) {
+            String sql = "SELECT fileName FROM mobileuser WHERE jobId = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, uuid.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            rs.first();
+
+            String fileName = rs.getString(1);
+
+            logger.info("Got {} from Database", fileName);
+
+           detailedResult.setVerseList(DataFinder.findAllVerses(fileName));
+           detailedResult.setOverlapList(DataFinder.findAllOverlap(fileName));
+
+        } catch (SQLException err) {
+            logger.error(err.getMessage());
+        }
+
+        return detailedResult;
+    }
 
     public model.Result getMushaf(String userEmail) {
         model.Result result = new model.Result(userEmail);
@@ -39,6 +71,7 @@ public class UserService {
                 model.setmFile(new File(rs.getString("fileName")));
                 model.setStatus(Constants.Status.valueOf(rs.getString("status")));
                 model.setUuid(rs.getString("jobId"));
+                model.setTimestamp(rs.getTimestamp("timestamp"));
                 imageModels.add(model);
             }
 
@@ -72,13 +105,14 @@ public class UserService {
         try (
                 Connection conn = MySqlDatabase.doConnection()
         ) {
-            String sql = "INSERT INTO mobileuser (email, jobId, status, fileName) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO mobileuser (email, jobId, status, fileName, timestamp) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, data.getEmail());
             ps.setString(2, data.getUuid().toString());
             ps.setString(3, data.getStatus().toString());
             ps.setString(4, data.getmFile().getName());
+            ps.setTimestamp(5, data.getTimestamp());
             ps.execute();
 
             logger.info("Data recorded - {}", data.getEmail());
