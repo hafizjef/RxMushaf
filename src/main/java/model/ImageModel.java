@@ -3,6 +3,7 @@ package model;
 import Utils.Constants;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 public class ImageModel {
@@ -11,6 +12,7 @@ public class ImageModel {
     private UUID uuid;
     private String email;
     private Constants.Status status;
+    private Timestamp timestamp;
 
     public ImageModel(File mFile, String email) {
 		super();
@@ -18,6 +20,7 @@ public class ImageModel {
         this.uuid = UUID.randomUUID();
         this.email = email;
         this.status = Constants.Status.PENDING;
+        this.timestamp = new Timestamp(System.currentTimeMillis());
     }
 
     public ImageModel() {
@@ -54,6 +57,12 @@ public class ImageModel {
     public void setmFile(File mFile) {
 		this.mFile = mFile;
 	}
-	
-	
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
 }
