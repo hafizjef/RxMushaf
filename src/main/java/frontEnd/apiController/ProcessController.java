@@ -26,7 +26,7 @@ public class ProcessController extends BaseController {
 
     public ProcessController(final UserService userService) {
 
-        post("/api", (req, res) -> {
+        post("/upload", (req, res) -> {
             // TODO:
             // Extract image & metadata from request payload
             // for further processing
