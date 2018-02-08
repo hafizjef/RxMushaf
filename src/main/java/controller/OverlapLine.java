@@ -53,7 +53,6 @@ public class OverlapLine {
      * VERSION 2.0: CUT IMGE INTO LINE (NEW)
      */
     public void cutline(String pathLine, String directData) throws IOException, InterruptedException {
-        logger.info("57 OVERLAPLINE");
         ArrayList<Integer> frequencyY; // hold value of frequency height
         ArrayList<Integer> topPoint = new ArrayList<>(); // hold all top point
         ArrayList<Integer> bottomPoint = new ArrayList<>(); // hold all bottom point
@@ -197,7 +196,6 @@ public class OverlapLine {
 
         //print RGB color [actual line)
         lineCut.addAll(printVerseSingleImage(directData + "/tashih/processed/line/actual/OverlapLineJava_", collectionImages, pathLine, reNumcollectionObjects)); // if picture does not have overlap it will going through this (If picture has overlap during segmentation it will through ThreadOverlap.java)
-        logger.info("#line cut add all");
 
         // Sort file Name
         Collections.sort(lineCut, new Comparator<String>() {

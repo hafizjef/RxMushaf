@@ -81,7 +81,6 @@ public class PointObjStop {
      * CUT THE IMAGE BY LINE - THIS METHOD USE THE METHOD FORM CLASS CutImage
      */
     public void cutline(String pathLine, String directData) throws IOException, InterruptedException {
-        logger.info("{} - 85 Obj Point", directData);
         OverlapLine cutimage = new OverlapLine();
         cutimage.setImage(arrayImage, buffImageInput); // set the image binary and bufferedImge
         cutimage.cutline(pathLine, directData); // VERSION 2: cut image into several line [actual line]

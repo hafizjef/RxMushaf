@@ -51,7 +51,6 @@ public class ProcessImages {
 
 		try {
 			convertImageCutLine.drawImage(buffOutputImageLINES); // binarize the threshold buffered image
-			logger.info("90 Process Images");
 			convertImageCutLine.cutline(mFrameRemoved.getName(), "output");
 			lineCut.addAll(convertImageCutLine.getDirectory()); // the place saved directory followed by [pathDirectory.doCrop.CropImage]
 			overlapLines.addAll(convertImageCutLine.getOverlapLines());
@@ -168,7 +167,7 @@ public class ProcessImages {
 		segmentationModel.setBeansCollectionPage(beansCollectionPage);
 
 		//FRAME
-		ArrayList<File> arrayFrame = new ArrayList<File>();
+		ArrayList<File> arrayFrame = new ArrayList<>();
 		arrayFrame.add(segmentation.getFileCollectionPicFrame());
 		Triangle triFrame = new Triangle();
 		triFrame.setFilesAndImages(arrayFrame);
@@ -178,7 +177,7 @@ public class ProcessImages {
 		segmentationModel.setBeansCollectionFrame(beansCollectionFrame);
 
 		//TEXT
-		ArrayList<File> arrayText = new ArrayList<File>();
+		ArrayList<File> arrayText = new ArrayList<>();
 		arrayText.add(segmentation.getFileCollectionPicText());
 		Triangle triText = new Triangle();
 		triText.setFilesAndImages(arrayText);
@@ -215,7 +214,8 @@ public class ProcessImages {
 		ArrayList<featureTriangle.bean.Bean_Feature> beansCollectionMarkedRed = triMarkedRed.generateFeatures();
 		//DMLsql dmlMarkedRed = new  DMLsql();
 		//dmlMarkedRed.insertMarkedRed(beansCollectionMarkedRed,mushafId);
-		triMarkedRed.save(beansCollectionMarkedRed);
+		//TODO Print Fix
+		//triMarkedRed.save(beansCollectionMarkedRed);
 		segmentationModel.setBeansCollectionMarkedRed(beansCollectionMarkedRed);
 
 		//Verse
