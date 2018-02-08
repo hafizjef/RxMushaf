@@ -1,5 +1,8 @@
 package controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MarkedRed {
+
+    private static final Logger logger = LoggerFactory.getLogger(MarkedRed.class);
 
     private ArrayList<File> fileMarkedRed = new ArrayList<File>();
     private ArrayList<File> imgVerse = new ArrayList<File>(); // save image verse
@@ -78,7 +83,7 @@ public class MarkedRed {
             try {
                 ImageIO.write(image, "jpeg", new File(sPathImage));
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
 
