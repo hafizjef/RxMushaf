@@ -3,7 +3,7 @@ package database;
 import java.sql.*;
 
 public class MySqlDatabase {
-    private static String DB_URL = "jdbc:mysql://127.0.1:3306/tashihdb?serverTimezone=UTC";
+    private static String DB_URL = "jdbc:mysql://127.0.1:3306/tashihdb?serverTimezone=Asia/Kuala_Lumpur";
     private static String USER = "root";
     private static String PASS = "";
 
