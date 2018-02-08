@@ -34,15 +34,12 @@ public class UserService {
             ps.setString(1, uuid.toString());
 
             ResultSet rs = ps.executeQuery();
-
             rs.first();
 
             String fileName = rs.getString(1);
 
-            logger.info("Got {} from Database", fileName);
-
-           detailedResult.setVerseList(DataFinder.findAllVerses(fileName));
-           detailedResult.setOverlapList(DataFinder.findAllOverlap(fileName));
+            detailedResult.setVerseList(DataFinder.findAllVerses(fileName));
+            detailedResult.setOverlapList(DataFinder.findAllOverlap(fileName));
 
         } catch (SQLException err) {
             logger.error(err.getMessage());
@@ -115,7 +112,7 @@ public class UserService {
             ps.setTimestamp(5, data.getTimestamp());
             ps.execute();
 
-            logger.info("Data recorded - {}", data.getEmail());
+            logger.debug("Data recorded - {}", data.getEmail());
 
         } catch (SQLException err) {
             logger.error(err.getMessage());
