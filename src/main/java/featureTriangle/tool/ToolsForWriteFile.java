@@ -111,21 +111,7 @@ public class ToolsForWriteFile {
     }
 
     public static void writeResultPosition(String datafilename, String typeFile, String filename, String typeOfFeatures, int value) {
-
-        try {
-		    /*String myfilename = typeFile + "_result.txt";
-		    FileWriter fw = new FileWriter(myfilename,true);
-		    fw.write(datafilename+", "+typeFile+", "+filename + " = " + value +"\r\n");
-		    fw.close();*/
-
-            String csvName = datafilename + "-Straight-Lines-Occurence.csv";
-            FileWriter fw = new FileWriter(DirectoryPath.getCSVPath3() + "/" + csvName, true);
-            fw.write(filename + ",\t" + value + ",\t" + typeOfFeatures + ",\t" + typeFile + "\n");
-            fw.flush();
-            fw.close();
-        } catch (IOException ioe) {
-            System.err.println("IOException: " + ioe.getMessage());
-        }
+        //
     }
 
     public static void getResultAddMinus(String filename, String atPoint, String typeFile) {
