@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class SolveStraightLine {
 
+    //TODO integrate histogram into 33 parts of solve straight line
+
     private static ArrayList<Point> points_upper_right;  // [1]
     private static ArrayList<Point> points_lower_right;  // [2]
     private static ArrayList<Point> points_upper_left;   // [3]
