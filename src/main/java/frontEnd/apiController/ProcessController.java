@@ -1,6 +1,7 @@
 package frontEnd.apiController;
 
 import Utils.Constants;
+import Utils.ResponseError;
 import controller.ProcessImages;
 import frontEnd.apiService.UserService;
 import io.reactivex.Observable;
@@ -39,6 +40,7 @@ public class ProcessController extends BaseController {
             } catch (Exception err) {
                 res.status(500);
                 logger.error(err.getMessage());
+                return new ResponseError("Internal Server Error");
             }
 
             ImageModel img = new ImageModel(new File(Constants.UPLOAD_DIR + File.separator + tempFile.getFileName()), req.queryParams("email"));
