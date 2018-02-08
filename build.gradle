@@ -30,3 +30,13 @@ dependencies {
 // Define the main class for the application
 mainClassName = 'App'
 
+task fatJar(type: Jar) {
+    group 'Distribution'
+    description 'Create a runnable jar with deps'
+    manifest {
+        attributes 'Main-Class': 'App'
+    }
+    baseName = project.name + '-fatjar'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
