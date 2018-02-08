@@ -1,5 +1,6 @@
 package frontEnd.apiController;
 
+import Utils.ResponseError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,11 +14,6 @@ abstract class BaseController {
 
     BaseController() {
         after((req, res) -> res.type("application/json"));
-
-        notFound((req, res) -> {
-            logger.error("{} - Resource Not Found", req.pathInfo());
-            res.type("application/json");
-            return toJson("ERROR : NOT FOUND");
-        });
+        notFound((req, res) -> toJson(new ResponseError("%s - Route Not Found", req.pathInfo())));
     }
 }
