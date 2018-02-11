@@ -1,5 +1,8 @@
 package controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ConvertImage {
+
+    private static final Logger logger = LoggerFactory.getLogger(ConvertImage.class);
 
 
     static int[][] arrayImage = new int[2000][2000];
@@ -30,9 +35,8 @@ public class ConvertImage {
         filename = inputFile.getName();
         try {
             buffImageInput = ImageIO.read(inputFile);
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+        } catch (IOException err) {
+            logger.error(err.getMessage());
         }
         return buffImageInput;
     }

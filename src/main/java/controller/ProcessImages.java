@@ -98,9 +98,16 @@ public class ProcessImages {
 
 		//******************** START : PROCESS EXTRACT FEATURES ON DATA MODEL [ConvertImage.java, FeatureTriangle.java]********************
 		// note: used similarity distance tool to compare all model and all test and find the best model to used as benchmarks to the test features data
-		File inputFileA = new File("data/SP1457571234515.jpg"); // image test [note: use arrayList];
+		//File inputFileA = new File("data/SP1457571234515.jpg"); // image test [note: use arrayList];
 
-		ArrayList<File> publishA = new ArrayList<>(); // MASTER FEATURES COLLECTION (collection of every extracted object on single rows)
+        File inputFileA = new File("output/res/spdata.jpg");
+        inputFileA.getParentFile().mkdirs();
+
+        if(!inputFileA.exists()) {
+            Utils.FileUtils.copyFromResource(inputFileA);
+        }
+
+		ArrayList<File> publishA; // MASTER FEATURES COLLECTION (collection of every extracted object on single rows)
 		ConvertImage convertImageA = new ConvertImage();
 		BufferedImage buffInputImageA = convertImageA.getImageInput(inputFileA);
 		BufferedImage buffOutputImageA = convertImageA.getImageOutput(buffInputImageA);
@@ -108,8 +115,9 @@ public class ProcessImages {
 		try {
 			ConvertImage.drawImageAfterThreasholdOnly(buffOutputImageA);
 			publishA = convertImageA.publish();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (IOException err) {
+			logger.error(err.getMessage());
+			throw err;
 		}
 		// process extract features
 		FeatureTriangle ftA = new FeatureTriangle();
