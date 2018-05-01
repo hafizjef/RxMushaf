@@ -2,6 +2,7 @@ package controller;
 
 import apiDynamic.UnsupervisedTools;
 import beanDynamic.BeanResult;
+import database.Result;
 import featureTriangle.main.Triangle;
 import model.Bean_SegmentationModel;
 import model.ImageModel;
@@ -162,6 +163,7 @@ public class ProcessImages {
 		logger.info("{} - Verse segmentation process complete", img.getmFile().getName());
 
 
+		ArrayList<Bean_SegmentationModel> collectionSegmentationModel = new ArrayList<Bean_SegmentationModel>();
 		Bean_SegmentationModel segmentationModel = new Bean_SegmentationModel();
 
 		//PAGE
@@ -235,6 +237,17 @@ public class ProcessImages {
 //			DMLsql dmlVerse = new  DMLsql();
 //			dmlVerse.insertVerse(beansCollectionVerse,mushafId);
 		segmentationModel.setBeansCollectionVerse(beansCollectionVerse);
+
+		// Extract information from segmentation?
+		collectionSegmentationModel.add(segmentationModel);
+
+		Result result = new Result(collectionSegmentationModel);
+		logger.info("{} - Model: {} Weight: {}", img.getmFile().getName(),
+				result.getCollectionDataTablePage().get(0).get(0).getModel(),
+				result.getCollectionDataTablePage().get(0).get(0).getWeight());
+
+		img.setModelName(result.getCollectionDataTablePage().get(0).get(0).getModel());
+		img.setWeight(Double.parseDouble(result.getCollectionDataTablePage().get(0).get(0).getWeight()));
 
 		logger.info("{} - Finish processing", img.getmFile().getName());
 	}
