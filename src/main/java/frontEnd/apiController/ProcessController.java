@@ -47,7 +47,7 @@ public class ProcessController extends BaseController {
 
             Observable.just(img)
                     .observeOn(Schedulers.computation())
-                    .doOnComplete(() -> userService.updateStatus(img.getUuid(), Constants.Status.COMPLETE))
+                    .doOnComplete(() -> userService.updateStatus(img, Constants.Status.COMPLETE))
                     .subscribe((data) -> {
                         userService.saveMushafDetails(data);
                         ProcessImages.doProcess(data);
