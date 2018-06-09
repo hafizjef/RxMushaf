@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: :sdt-lib-1.2:">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/sdt-lib-1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
