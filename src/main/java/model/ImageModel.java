@@ -13,6 +13,8 @@ public class ImageModel {
     private String email;
     private Constants.Status status;
     private Timestamp timestamp;
+    private String modelName;
+    private double weight;
 
     public ImageModel(File mFile, String email) {
 		super();
@@ -64,5 +66,21 @@ public class ImageModel {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 }

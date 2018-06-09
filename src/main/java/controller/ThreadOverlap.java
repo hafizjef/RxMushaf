@@ -1,3 +1,4 @@
+/*
 package controller;
 
 import org.slf4j.Logger;
@@ -52,9 +53,11 @@ public class ThreadOverlap extends Thread {
         }
     }
 
-    /*
+    */
+/*
      * PRINT RGB COLOR
-     */
+     *//*
+
     public ArrayList<String> printVerse(String path, ArrayList<int[][]> aLImage, String imgName, int index) throws IOException {
         ArrayList<String> directoryImageSingle = new ArrayList<String>();   // NEW 21/02/2017 1:37 AM
 
@@ -113,9 +116,11 @@ public class ThreadOverlap extends Thread {
         return directoryImage;
     }
 
-    /*
+    */
+/*
      * PRINT BINARY: print the image in array (int[][] outputImage)
-     */
+     *//*
+
     public void printBinary(int[][] outputImage) {
         for (int y = 0; y < outputImage.length; y++) {
             for (int x = 0; x < outputImage[1].length; x++) {
@@ -131,3 +136,4 @@ public class ThreadOverlap extends Thread {
     }
 
 }
+*/

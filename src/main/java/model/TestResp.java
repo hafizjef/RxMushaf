@@ -3,32 +3,58 @@ package model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Meme {
-    @SerializedName("Name")
+public class TestResp {
+
+    private String notUsed;
+
+    @SerializedName("ComplainantName")
     @Expose
-    private String name;
-    @SerializedName("Age")
+    private String complainantName;
+    @SerializedName("ComplainantMyKad")
     @Expose
-    private Integer age;
+    private String complainantMyKad;
+    @SerializedName("ComplainantEmail")
+    @Expose
+    private String complainantEmail;
 
-    public Meme(String name, int age) {
-        this.name = name;
-        this.age = age;
+    public String getComplainantName() {
+        return complainantName;
     }
 
-    public String getName() {
-        return name;
+    public void setComplainantName(String complainantName) {
+        this.complainantName = complainantName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getComplainantMyKad() {
+        return complainantMyKad;
     }
 
-    public int getAge() {
-        return age;
+    public void setComplainantMyKad(String complainantMyKad) {
+        this.complainantMyKad = complainantMyKad;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public String getComplainantEmail() {
+        return complainantEmail;
+    }
+
+    public void setComplainantEmail(String complainantEmail) {
+        this.complainantEmail = complainantEmail;
+    }
+
+    public String getNotUsed() {
+        return notUsed;
+    }
+
+    public void setNotUsed(String notUsed) {
+        this.notUsed = notUsed;
+    }
+
+    @Override
+    public String toString() {
+        return "TestResp{" +
+                "complainantName='" + complainantName + '\'' +
+                ", complainantMyKad='" + complainantMyKad + '\'' +
+                ", complainantEmail='" + complainantEmail + '\'' +
+                '}';
     }
 }

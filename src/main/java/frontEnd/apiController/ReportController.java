@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import frontEnd.apiService.ReportService;
 import model.Report;
 import model.Response;
+import model.TestResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +18,11 @@ public class ReportController {
 
     public ReportController(final ReportService reportService) {
 
-        post("/report", (req, res) -> {
+        post("/report", "application/json", (req, res) -> {
             Gson gson = new Gson();
-            Report report = gson.fromJson(req.body(), Report.class);
-            logger.error(report.getComplainantName());
+            //Report report = gson.fromJson(req.body(), Report.class);
+            TestResp resp = gson.fromJson(req.body(), TestResp.class);
+            logger.error(resp.toString());
             try {
                 //reportService.addReport(report);
             } catch (Exception err) {

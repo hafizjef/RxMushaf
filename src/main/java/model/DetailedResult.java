@@ -7,6 +7,7 @@ public class DetailedResult {
     private UUID uuid;
     private List<String> verseList;
     private List<String> overlapList;
+    private ModelPageResult result;
 
     public DetailedResult(UUID uuid){
         this.uuid = uuid;
@@ -18,5 +19,9 @@ public class DetailedResult {
 
     public void setOverlapList(List<String> overlapList) {
         this.overlapList = overlapList;
+    }
+
+    public void setResult(ModelPageResult result) {
+        this.result = result;
     }
 }

@@ -1,6 +1,20 @@
 package database;
 
+import model.Report;
+import org.apache.commons.io.FilenameUtils;
+import org.primefaces.model.UploadedFile;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class MySqlDatabase {
     private static String DB_URL = "jdbc:mysql://127.0.1:3306/tashihdb?serverTimezone=Asia/Kuala_Lumpur";
@@ -403,6 +417,70 @@ public class MySqlDatabase {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public static void insertReport(Report report) throws SQLException, IOException {
+        BufferedImage originalImage = ImageIO.read(report.getFile().getInputstream());
+
+        java.util.Date date = new java.util.Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+
+        int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+        BufferedImage resizeImageJpg = resizeImage(originalImage, type);
+        String newFilename = storedImage(report.getFile());
+
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        ImageIO.write(resizeImageJpg, "jpg", os);
+        InputStream is = new ByteArrayInputStream(os.toByteArray());
+
+        Connection conn = MySqlDatabase.doConnection();
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO laporan"
+                + "(nama_pengadu,ic_pengadu,email_pengadu,aduan,nama_gambar,"
+                + "blob_gambar,lokasi,tarikh_laporan_dibuat,tarikh_laporan_dikemaskini,"
+                + "status_laporan,staffid,laporanId)"
+                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+
+        ps.setString(1, report.getComplainantName().toUpperCase());
+        ps.setString(2, report.getComplainantMyKad());
+        ps.setString(3, report.getComplainantEmail().toUpperCase());
+        ps.setString(4, report.getReports());
+        ps.setString(5, newFilename); //TODO Filename
+        ps.setBlob(6, is); //TODO Image blob
+        ps.setString(7, report.getLocation().toUpperCase());
+        ps.setString(8, dateFormat.format(date));
+        ps.setString(9, null);
+        ps.setString(10, "U");
+        ps.setString(11, null);
+        ps.setString(12, "");
+    }
+
+    private static String storedImage(UploadedFile file) {
+        String newFilename = "";
+
+        try {
+            Path folder = Paths.get("StoredImageReport");
+            int getNumberOfFiles = new File("StoredImageReport").list().length;
+            String extension = FilenameUtils.getExtension(file.getFileName());
+            Path files = Files.createTempFile(folder, "image" + (getNumberOfFiles + 1) + "-", "." + extension);
+            newFilename = files.getFileName().toString();
+
+            try (InputStream input = file.getInputstream()) {
+                Files.copy(input, files, StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return newFilename;
+    }
+
+    private static BufferedImage resizeImage(BufferedImage originalImage, int type) {
+        BufferedImage resizedImage = new BufferedImage(300, 300, type);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, 300, 300, null);
+        g.dispose();
+
+        return resizedImage;
     }
 
 }

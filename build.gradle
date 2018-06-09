@@ -3,6 +3,9 @@ apply plugin: 'application'
 
 repositories {
     jcenter()
+    flatDir{
+        dirs 'libs'
+    }
 }
 
 configurations.all {
@@ -10,10 +13,13 @@ configurations.all {
 }
 
 dependencies {
+    compile 'net.sargue:mailgun:1.5.0'
     compile 'io.reactivex.rxjava2:rxjava:2.1.8'
     compile 'commons-io:commons-io:2.6'
     compile 'com.sparkjava:spark-core:2.7.1'
     compile 'com.google.code.gson:gson:2.8.2'
+    compile 'org.primefaces:primefaces:6.0'
+
 
     // Logging
     // compile 'org.slf4j:slf4j-simple:1.7.25'
@@ -22,6 +28,9 @@ dependencies {
 
     //databases
     compile 'mysql:mysql-connector-java:6.0.6'
+
+    // local
+    compile name: 'sdt-lib-1.2'
 
     // Tests
     testCompile 'junit:junit:4.12'

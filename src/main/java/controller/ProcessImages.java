@@ -29,15 +29,16 @@ public class ProcessImages {
 		ConvertFrame mConvertFrame = new ConvertFrame();
 		BufferedImage mBuffInput = mConvertFrame.getImageInput(img.getmFile());
 		BufferedImage mBuffOutput = mConvertFrame.getImageOutput(mBuffInput);
-		
+
 		try {
 			mFrameRemoved = mConvertFrame.drawImage(mBuffOutput, "output", img.getmFile().getName());
 			segmentation.setFileCollectionPicText(mFrameRemoved);
 			segmentation.setFileCollectionPicFrame(mConvertFrame.getfFrameWithoutText());
 		} catch (IOException err) {
+			logger.error(err.getMessage());
 			throw err;
 		}
-		
+
 		logger.info("{} - Frame Removed", img.getmFile().getName());
 		logger.info("{} - Segmentation Process", img.getmFile().getName());
 

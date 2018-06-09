@@ -161,7 +161,7 @@ public class OverlapLine {
         //END: RearrangePosition
 
         // Using thread for every single duplicate line
-        ThreadOverlap[] threadOverlapArray = new ThreadOverlap[duplicateLineNumbers.size()];
+        /*ThreadOverlap[] threadOverlapArray = new ThreadOverlap[duplicateLineNumbers.size()];
         for (int i = 0; i < duplicateLineNumbers.size(); i++) {
             ArrayList<Integer> dupListCollectionObjectT = new ArrayList<>();
             for (int tempIndT = 0; tempIndT < duplicateLineNumbers.get(i); tempIndT++) {
@@ -170,22 +170,20 @@ public class OverlapLine {
             }
             threadOverlapArray[i] = new ThreadOverlap("overlap" + i, imageBinaryCutThread.get(i), buffImageInputThread.get(i), directData, pathLine, dupListCollectionObjectT);
             threadOverlapArray[i].start();
-        }
+        }*/
 
-        for (int i = 0; i < threadOverlapArray.length; i++) {
-//	    	System.out.println(threadOverlapArray[i]+".join(); - Start [OverlapLine.java]");
+        /*for (int i = 0; i < threadOverlapArray.length; i++) {
+	    	System.out.println(threadOverlapArray[i]+".join(); - Start [OverlapLine.java]");
             threadOverlapArray[i].join();
-//	    	System.out.println(threadOverlapArray[i]+".join(); - Finish [OverlapLine.java]");
+	    	System.out.println(threadOverlapArray[i]+".join(); - Finish [OverlapLine.java]");
+	    	System.out.println("[OverlapLine.java] threadOverlapArray[i].getDirectoryImage() = "+ threadOverlapArray[i].getDirectoryImage());
+        }*/
 
-
-//	    	System.out.println("[OverlapLine.java] threadOverlapArray[i].getDirectoryImage() = "+ threadOverlapArray[i].getDirectoryImage());
-        }
-
-        if (threadOverlapArray.length >= 1) {
+        /*if (threadOverlapArray.length >= 1) {
             for (int i = 0; i < threadOverlapArray.length; i++)
                 lineCut.addAll(threadOverlapArray[i].getDirectoryImage()); //NEW 21/02/2017 2:03 AM - [OLD]--> lineCut.addAll(threadOverlapArray[threadOverlapArray.length-1].getDirectoryImage());
-//	    	System.out.println("AllThread.join(); - Finish [OverlapLine.java]");
-        }
+	    	System.out.println("AllThread.join(); - Finish [OverlapLine.java]");
+        }*/
 
         ArrayList<Integer> dupNumcollectionObjects = new ArrayList<Integer>();
         for (int dupNum = 0; dupNum < overlapLineImage.size(); dupNum++) {

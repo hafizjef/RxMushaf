@@ -1,6 +1,7 @@
 package frontEnd.apiController;
 
 import Utils.Constants;
+import Utils.Email;
 import Utils.ResponseError;
 import controller.ProcessImages;
 import frontEnd.apiService.UserService;
@@ -45,14 +46,24 @@ public class ProcessController extends BaseController {
 
             ImageModel img = new ImageModel(new File(Constants.UPLOAD_DIR + File.separator + tempFile.getFileName()), req.queryParams("email"));
 
+            if (!Email.validate(img.getEmail())) {
+                return new ResponseError("Invalid Email Address received");
+            }
+
             Observable.just(img)
                     .observeOn(Schedulers.computation())
-                    .doOnComplete(() -> userService.updateStatus(img, Constants.Status.COMPLETE))
+                    .doOnComplete(() -> {
+                        userService.updateStatus(img, Constants.Status.COMPLETE);
+                        img.setStatus(Constants.Status.COMPLETE);
+                        userService.sendNotification(img);
+                    })
                     .subscribe((data) -> {
                         userService.saveMushafDetails(data);
                         ProcessImages.doProcess(data);
                     }, (e) -> {
+                        img.setStatus(Constants.Status.ERROR);
                         userService.updateStatus(img.getUuid(), Constants.Status.ERROR);
+                        userService.sendNotification(img);
                         logger.error(e.getMessage());
                     });
 
